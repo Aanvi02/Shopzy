@@ -10,7 +10,7 @@ export const AppContextProvider = ({ children }) => {
   const currency = "₹";
   const navigate = useNavigate();
 
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([]);
@@ -18,23 +18,22 @@ export const AppContextProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");   // ✅ FIXED
 
   // fetch products
-  const fetchProducts = async () => {
-    setProducts(dummyProducts);
-  };
-
+  const fetchProducts = () => {
+  setProducts(dummyProducts);
+};
   // add to cart
   const addToCart = (itemId) => {
-    let cartData = structuredClone(cartItems);
+  let cartData = { ...cartItems };
 
-    if (cartData[itemId]) {
-      cartData[itemId] += 1;
-    } else {
-      cartData[itemId] = 1;
-    }
-
-    setCartItems(cartData);
+  if (cartData[itemId]) {
+    cartData[itemId] += 1;
+  } else {
+    cartData[itemId] = 1;
     toast.success("Added to Cart");
-  };
+  }
+
+  setCartItems(cartData);
+};
 
   // update cart
   const updateCartItem = (itemId, quantity) => {
@@ -46,20 +45,20 @@ export const AppContextProvider = ({ children }) => {
   };
 
   // remove from cart
-  const removeFromCart = (itemId) => {
-    let cartData = structuredClone(cartItems);
+ const removeFromCart = (itemId) => {
+  let cartData = { ...cartItems };
 
-    if (cartData[itemId]) {
-      cartData[itemId] -= 1;
+  if (cartData[itemId]) {
+    cartData[itemId] -= 1;
 
-      if (cartData[itemId] === 0) {
-        delete cartData[itemId];
-      }
+    if (cartData[itemId] === 0) {
+      delete cartData[itemId];
+      toast.success("Removed from Cart");
     }
+  }
 
-    setCartItems(cartData);
-    toast.success("Removed from Cart");
-  };
+  setCartItems(cartData);
+};
 
   useEffect(() => {
     fetchProducts();
