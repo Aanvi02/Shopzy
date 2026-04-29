@@ -39,9 +39,9 @@ export const isSellerAuth = async (req, res) => {
     }
 }
 
-//logout seller 
+//logout seller
 
-export const sellerlogout = async (req, res) => {
+export const sellerLogout = async (req, res) => {
     try {
         res.clearCookie('sellertoken', {
             httpOnly: true,
