@@ -93,6 +93,7 @@ export const assets = {
   black_arrow_icon,
   white_arrow_icon,
   main_banner_bg,
+  profile_icon,
   main_banner_bg_sm,
   bottom_banner_image,
   bottom_banner_image_sm,
